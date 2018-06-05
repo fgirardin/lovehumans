@@ -3,7 +3,7 @@
 .video-frame {
     width: 300px;
     height: 627px;
-    background-image: url("../img/iphone@2x.jpg");
+    background-image: url("../../img/iphone@2x.jpg");
     background-repeat: no-repeat; 
     background-size: contain;
     position: relative;
