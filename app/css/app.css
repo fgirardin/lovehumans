@@ -1,0 +1,218 @@
+/* app css stylesheet */
+
+.video-frame {
+    width: 300px;
+    height: 627px;
+    background-image: url("/img/iphone@2x.jpg");
+    background-repeat: no-repeat; 
+    background-size: contain;
+    position: relative;
+	}
+
+.video-frame video {
+    position: absolute;
+    top: 95px;
+    left: 27px;
+    width: 250px;
+    height: 444px;
+}	
+
+.splash {
+    margin: 20px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.md-display-2 {
+	font-weight: 800;
+}
+
+.main-container {
+	max-width: 740px;
+}
+
+.iphone {
+	max-height: 500px;
+	margin-bottom: 30px;
+}
+
+.social-icon {
+	max-height: 25px;
+	margin-right: 5px;
+}
+
+.argument {
+	max-width: 380px;
+}
+
+
+.argument-left {
+	max-width: 380px;
+	float:right;
+}
+
+.chapter {
+	background-color: #eeeeee;
+	padding: 10px;
+	border-left: 2px dotted rgba(0, 0, 0, 0.6);
+}
+
+.chapter-gutter{
+	background-color: #eeeeee;
+	min-height: 120px;
+	border-left: 2px dotted rgba(0, 0, 0, 0.6);	
+}
+
+.content-image {
+    width: 100%;    
+}
+
+.story-card {
+	overflow: hidden;
+	background-color: white;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.082);
+}
+
+.quote {
+	font-family: "Times New Roman",Times,serif;
+	line-height: 1.25;
+	border-top: 1px solid rgba(0, 0, 0, 0.3);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	padding: 15px;
+	margin: 15px;
+	font-weight: 100;	
+}
+
+.header {
+	padding: 15px;
+	font-weight: 100;		
+	background: white;
+	color: black;
+}
+
+.footer {
+	padding: 15px;
+
+}
+
+.reverse-button-footer {
+	padding: 15px;
+	color: black;
+	background: none;
+	font-size: 12px;	
+}
+
+.author {
+	text-align: right;
+	padding-right: 15px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+    box-sizing: content-box;
+}
+
+.big-avatar {
+    min-width: 75px;
+    min-height: 75px;
+    max-width: 75px;
+    max-height: 75px;    
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px;
+    border-radius: 50%;
+    box-sizing: content-box;
+}
+
+.screenshot-header {
+	max-width: 680px;
+}
+
+.screenshot {
+	max-width: 680px;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14), 0px 2px 2px 0px rgba(0, 0, 0, 0.098), 0px 1px 5px 0px rgba(0, 0, 0, 0.082);	
+}
+
+md-list-item.md-2-line .md-list-item-text h4, md-list-item.md-2-line > .md-no-style .md-list-item-text h4, md-list-item.md-3-line .md-list-item-text h4, md-list-item.md-3-line > .md-no-style .md-list-item-text h4 {
+    line-height: 1em;
+}
+
+
+button, html, input, select, textarea {
+    font-family: RobotoDraft,Roboto,"Helvetica Neue",sans-serif;
+}
+
+.sendgrid-subscription-widget input {
+	border-color: #9E9E9E;	
+	padding-bottom: 0px;
+	border-width: 0px 0px 2px;	
+	outline: 0px none;
+	display: inline-block;
+	-moz-appearance: none;
+	background: transparent none repeat scroll 0px 0px;
+	padding: 2px 2px 1px;
+	border-width: 0px 0px 1px;
+	line-height: 26px;
+	border-radius: 0px;
+    font-family: RobotoDraft,Roboto,"Helvetica Neue",sans-serif;
+    font-size: 100%;
+	vertical-align: baseline;
+}
+
+
+.sendgrid-subscription-widget input[type='submit'] {
+	background-color: #00F0A7;	
+	color: rgba(0, 0, 0, 0.87);
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);
+	border-radius: 3px;	
+	outline: 0px none;
+	border: 0px none;
+	padding: 0px 6px;
+	margin: 6px 8px;
+	line-height: 36px;
+	min-height: 36px;
+	white-space: nowrap;
+	min-width: 88px;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 14px;
+	font-style: inherit;
+	font-variant: inherit;
+	font-family: inherit;
+	text-decoration: none;
+	cursor: pointer;
+	overflow: hidden;
+	transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0s, background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;	
+	letter-spacing: 0.01em;	
+	vertical-align: baseline;
+}
+
+.sendgrid-subscription-widget label > span {
+    display: none;
+}
+
+.sendgrid-subscription-widget .response {
+	font-size: 12px;
+	letter-spacing: 0.02em;
+}
+
+.sendgrid-subscription-widget {
+}
+
+@media only screen 
+  and (max-width: 736px) { 
+	.sendgrid-subscription-widget input[type='submit'] {
+		font-size: 13px;
+	}
+	.sendgrid-subscription-widget input {
+		font-size: 13px;
+	}
+}

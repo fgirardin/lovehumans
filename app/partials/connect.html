@@ -1,0 +1,39 @@
+<md-content layout-padding layout="column" layout-align="center center">
+	<div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+  		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>  
+	<div class="main-container" ng-hide="loading">
+		<h2 class="md-headline" style="text-align: center;">What social media do you regularly use?</h2>
+      	<md-divider ></md-divider>		
+      	<p class="md-body-1" style="text-align: center;">The social media you connect allow to prioritize your contacts and you'll have access to a single daily dose of context about their lives, thoughts, experiences and events.</p>
+		<section layout="row" layout-sm="column" layout-align="center center">
+			<a href="http://auth.lovehumans.co/flickr?app=humans&domain=connect"><md-button class="md-primary md-hue-1 md-raised">Connect Flickr</md-button></a>
+			<a href="http://auth.lovehumans.co/instagram?app=humans&domain=connect"><md-button class="md-primary md-hue-1 md-raised">Connect Instagram</md-button></a>
+			<a href="http://auth.lovehumans.co/twitter?app=humans&domain=connect"><md-button class="md-primary md-hue-1 md-raised">Connect Twitter</md-button></a>
+		</section>      	
+		<md-content class="md-padding">
+		    <md-list>
+		      <md-list-item class="md-3-line" ng-repeat="account in accounts">
+		        <img ng-src="{{account.user_photo_url}}" class="md-avatar" alt="{{account.user_nickname}}" />
+		        <div class="md-list-item-text">
+		          <h3>{{ account.account_type.name }}</h3>
+		          <h4>{{ account.user_nickname }}</h4>
+		          <p><a href="" ng-click="removeAccount(account)">Log out</a></p>
+		        </div>
+		      </md-list-item>
+		     </md-list>	
+		     <md-icon md-font-icon="material-icons" /> 
+		</md-content>    
+      	<md-divider ></md-divider>		
+      	<div ng-show="accounts.length > 0">		
+			<md-content class="md-padding" layout="column" layout-align="center center">  	
+			<md-button class="md-raised" ng-click="goHome()">Next</md-button>
+			</md-content>    
+		</div>
+		<md-content layout="column" layout-align="center center">
+		<h4 class="md-title">Our Pledge to you</h4>
+		<p class="md-body-1">We will NEVER write messages to your contacts, or share your private information.</p>
+		</md-content>      			
+
+	</div>
+</md-content>

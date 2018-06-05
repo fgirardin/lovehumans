@@ -1,0 +1,210 @@
+<md-content layout-padding layout="column" layout-align="center center">
+
+  <!-- Spinner -->
+	<div layout="column" layout-align="center center" ng-show="updating">
+  		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  		<p>Hang on... We are assembling the feeds. It might take a minute...</p>
+	</div>  
+
+  <!-- Storyboard -->
+  <div class="main-container" ng-hide="updating" layout-fill md-swipe-left="goNextHuman()" md-swipe-right="goPreviousHuman()">
+
+  	<!-- Edit Header -->
+  	<section layout="row" layout-align="end">
+		<md-button class="md-primary" ng-click="goToEdit();" ng-show="human != undefined">Edit {{human.name}}</md-button>
+	</section>
+    <!-- Navigation Header -->
+    <div layout="row" layout-align="space-between start">
+    	<md-button class="md-icon-button" aria-label="Previous" ng-click="goPreviousHuman()">
+            <i class="material-icons" ng-show="humans.length > 0">chevron_left</i>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Home" ng-click="goHome()">
+            <i class="material-icons">menu</i>
+        </md-button>                          
+        <md-button class="md-icon-button" aria-label="Next" ng-click="goNextHuman()">
+            <i class="material-icons" ng-show="humans.length > 0">chevron_right</i>
+        </md-button>                          
+    </div>	
+  	<section layout="column" layout-align="center center">
+			<h1 class="md-display-1">{{memento.data.human.name}}</h1>
+			<div layout="row">
+				<div ng-repeat="contact in memento.data.human.contacts">
+					<img ng-src="{{contact.profile_picture_url}}" class="avatar" alt="{{contact.fullname}}" />
+				</div>
+			</div>
+			<h3 class="md-title">Feed of {{memento.title}}</h3>						
+	</section>
+
+  	<!-- Chapters -->	
+	<div ng-repeat="chapter in memento.data.chapters">
+		<!-- Chapter with 1 card -->
+		<div class="chapter" ng-hide="chapter.moments.length > 1">
+			<!-- Unique cards -->
+			<md-grid-list 
+			    md-cols-sm="1" md-cols-md="4" md-cols-gt-md="6"
+			    md-row-height-gt-md="1:1" md-row-height="4:3"
+			    md-gutter="12px" md-gutter-gt-sm="20px" >
+			    <md-grid-tile class="story-card" ng-repeat="moment in prepareLayout(chapter.moments)"
+			        md-rowspan="{{moment.span.row}}" md-colspan-sm="1" md-colspan-md="4" md-colspan="6">	
+
+			        <!-- Cover -->	
+			        <div ng-show="moment.selected==undefined">
+				        <md-grid-tile-header class="header md-caption">
+				        	{{moment.place.name}} <span am-time-ago="moment.created_at"></span>
+				      	</md-grid-tile-header>
+				        <span ng-if="moment.format=='longdescription'">
+				        	<h2 class="quote" ng-bind-html="moment.pretty_description"></h2>
+				        	<p ng-hide="moment.personal" class="md-caption author">
+				        		By {{moment.author}}
+				        	</p>
+				        </span>
+				        <span ng-if="moment.format=='shortdescription'">
+				        	<h2 class="quote" ng-bind-html="moment.pretty_description"></h2>
+				        	<p ng-hide="moment.personal" class="md-caption author">
+				        		By {{moment.author}}
+				        	</p>				        	
+				        </span>				        
+				        <span ng-if="moment.format=='image'">
+							<div ng-repeat="photo in moment.photos.elements">
+								<img class="content-image" ng-src="{{photo.url}}" alt="">
+							</div>				      
+				      		<md-grid-tile-footer class="footer">
+				        		<p ng-bind-html="moment.pretty_description"></p>
+				      		</md-grid-tile-footer>				        	
+				      	</span>
+						<span ng-if="moment.format=='imagedescription'">
+							<div layout="row" layout-sm="column" layout-align="center center">
+								<div flex style="margin-right: 10px; margin-left: 10px">
+									<div ng-repeat="photo in moment.photos.elements">
+										<img class="content-image" ng-src="{{photo.url}}" alt="">
+									</div>									
+								</div>
+								<div flex>
+									<span ng-show="moment.description.length > 70">
+										<h4 class="quote" ng-bind-html="moment.pretty_description"></h4>
+									</span>
+									<span ng-hide="moment.description.length > 70">
+										<h2 class="quote" ng-bind-html="moment.pretty_description"></h2>
+									</span>									
+								</div>
+							</div>
+						</span>
+			      		<md-grid-tile-footer class="reverse-button-footer" layout="row" layout-align="end center" ng-click="selectMoment(moment)">
+				        		<p><i class="material-icons">turned_in_not</i></p>
+				      	</md-grid-tile-footer>							
+					</div>
+					<!-- Backcover -->
+					<div ng-hide="moment.selected==undefined">
+						<!-- <div  ng-bind-html="moment.embed.html"></div> -->
+						
+						<div layout="column" layout-align="center center">
+							<p>By {{moment.contact.username}}</p>
+							<a href="{{ moment.url }}" target="_blank"><md-button md-no-ink class="md-primary md-hue-1 md-raised">Open in {{moment.account.account_type.name}}</md-button></a>
+						</div>
+			      		<md-grid-tile-footer class="reverse-button-footer" layout="row" layout-align="end center" ng-click="selectMoment(moment)">
+				        		<p><i class="material-icons">turned_in</i></p>
+				      	</md-grid-tile-footer>								
+						
+					</div>
+			    </md-grid-tile>
+			</md-grid-list>
+
+		</div>
+
+
+
+
+
+
+
+
+		<!-- Chapter with multiple cards -->
+		<div class="chapter" ng-show="chapter.moments.length > 1">
+	        <div ng-show="getGroupMapUrl(chapter) != undefined">
+			   	<img ng-src="{{getGroupMapUrl(chapter)}}" class="content-image" alt="">
+	        </div>			
+			<div ng-show="chapter.summary!=''">
+				<div ng-show="chapter.type == 'period'">
+					<h2 class="md-headline"><span am-time-ago="getTitle(chapter)"></span> {{chapter.summary}}</h2>
+				</div>
+				<div ng-hide="chapter.type == 'period'">
+				  	<h2 class="md-headline">{{chapter.summary}}</h2>
+				</div>
+			</div>
+			<div ng-hide="chapter.summary!=''">
+			  	  <h2 class="md-headline"><span am-time-ago="getTitle(chapter)"></span></h2>
+			</div>		   
+			<!-- Cards -->
+			<md-grid-list 
+			    md-cols-sm="1" md-cols-md="4" md-cols-gt-md="6"
+			    md-row-height-gt-md="1:1" md-row-height="4:3"
+			    md-gutter="12px" md-gutter-gt-sm="20px" >
+			    <md-grid-tile class="story-card" ng-repeat="moment in prepareLayout(chapter.moments)"
+			        md-rowspan="{{moment.span.row}}" md-colspan-sm="1" md-colspan-md="2" md-colspan="{{moment.span.col}}">	
+
+			        <!-- Cover -->	
+			        <div ng-show="moment.selected==undefined">
+				        <md-grid-tile-header class="header md-caption">
+				        	{{moment.place.name}} <span am-time-ago="moment.created_at"></span>
+				      	</md-grid-tile-header>
+				        <span ng-if="moment.format=='longdescription'">
+				        	<p class="quote" ng-bind-html="moment.pretty_description"></p>
+				        	<p ng-hide="moment.personal" class="md-caption author">
+				        		By {{moment.author}}
+				        	</p>
+				        </span>
+				        <span ng-if="moment.format=='shortdescription'">
+				        	<h2 class="quote" ng-bind-html="moment.pretty_description"></h2>
+				        	<p ng-hide="moment.personal" class="md-caption author">
+				        		By {{moment.author}}
+				        	</p>				        	
+				        </span>				        
+				        <span ng-if="moment.format=='image'">
+							<div ng-repeat="photo in moment.photos.elements">
+								<img class="content-image" ng-src="{{photo.url}}" alt="">
+							</div>				      
+				      		<md-grid-tile-footer class="footer">
+				        		<p ng-bind-html="moment.pretty_description"></p>
+				      		</md-grid-tile-footer>				        	
+				      	</span>
+						<span ng-if="moment.format=='imagedescription'">
+							<div layout="row" layout-sm="column" layout-align="center center">
+								<div flex style="margin-right: 10px; margin-left: 10px">
+									<div ng-repeat="photo in moment.photos.elements">
+										<img class="content-image" ng-src="{{photo.url}}" alt="">
+									</div>									
+								</div>
+								<div flex>
+									<span ng-show="moment.description.length > 70">
+										<h4 class="quote" ng-bind-html="moment.pretty_description"></h4>
+									</span>
+									<span ng-hide="moment.description.length > 70">
+										<h2 class="quote" ng-bind-html="moment.pretty_description"></h2>
+									</span>									
+								</div>
+							</div>
+						</span>
+			      		<md-grid-tile-footer class="reverse-button-footer" layout="row" layout-align="end center" ng-click="selectMoment(moment)">
+				        		<p><i class="material-icons">turned_in_not</i></p>
+				      	</md-grid-tile-footer>						
+					</div>
+					<!-- Backcover -->
+					<div ng-hide="moment.selected==undefined">
+						<!-- <div  ng-bind-html="moment.embed.html"></div> -->
+						
+						<div layout="column" layout-align="center center">
+							<p>By {{moment.contact.username}}</p>
+							<a href="{{ moment.url }}" target="_blank"><md-button md-no-ink class="md-primary md-hue-1 md-raised">Open in {{moment.account.account_type.name}}</md-button></a>
+						</div>
+			      		<md-grid-tile-footer class="reverse-button-footer" layout="row" layout-align="end center" ng-click="selectMoment(moment)">
+				        		<p><i class="material-icons">turned_in</i></p>
+				      	</md-grid-tile-footer>							
+					
+					</div>
+			    </md-grid-tile>
+			</md-grid-list>
+		</div>
+		<div class="chapter-gutter"></div>
+  	</div>
+  </div>
+</md-content>

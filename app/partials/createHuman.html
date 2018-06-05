@@ -1,0 +1,15 @@
+<md-content layout-padding layout="column" layout-align="center center">
+	<div class="main-container" layout-fill>
+		<div layout="column" layout-sm="column" layout-align="space-around">
+			<h1 class="md-headline">Create a Human</h1>	
+			<p class="md-body-1">A Human is a combination of feeds of one or many of your contacts, friends, or connections</p>
+			<form name="createHumanForm">
+				  <md-input-container>
+				    <label>Type the name of this new Human</label>
+				    <input class="md-display-1" ng-model="human_name" type="text">
+				  </md-input-container>
+				  <md-button md-no-ink class="md-primary md-hue-1 md-raised" ng-click="createHuman()">Next</md-button>
+		     </form>
+	 	</div>
+	 </div>
+</md-content>

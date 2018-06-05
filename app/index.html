@@ -1,0 +1,62 @@
+<html lang="en" ng-app="humans">
+  <head>
+    <title>Humans</title>    
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1" />  
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/app.css"/>    
+    <link href="img/favicon.ico" rel="icon" />    
+  </head>
+
+  <body>
+    <span ng-controller="MenuCtrl">    
+      <md-toolbar md-scroll-shrink layout="row" class="md-hue-1">
+        <div class="md-toolbar-tools">
+          <h1 class="md-title"><a href="#/">Humans</a></h1>
+          <span flex></span>
+            <div ng-show="isAuthenticated && !register">   
+              <a href="#/settings"><md-button>Settings</md-button></a>
+              <a href="#/logout"><md-button>Logout</md-button></a>
+            </div>
+        </div>
+      </md-toolbar>    
+      <md-content style="height: 100%;">
+        <div ng-view></div>
+        <div layout="row" style="background-color: #757575; color: white; padding: 50px; margin-top: 30px;">
+            <div flex-gt-sm="20" layout-align="center">
+           </div>
+           <div flex-gt-sm="60">
+                <p class="md-caption" style="text-align: center;">Humans is a personal media hygiene solution by 6andMe, a Near Future Laboratory spin-off.<br/>© 2015. All Rights Reserved</p>
+                <p class="md-caption" style="text-align: center;">Get in touch <a style="color: white;" href="mailto:we@lovehumans.co">we@lovehumans.co</a></p>
+           </div>
+           <div flex-gt-sm="20">
+           </div>            
+        </div>            
+      </md-content>    
+    </span>   
+
+
+    <!-- Angular Material Dependencies -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="bower_components/angular-material/angular-material.min.js"></script>  
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/moment/moment.js"></script>  
+  <script src="bower_components/angular-moment/angular-moment.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+
+</body>
+</html>

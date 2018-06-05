@@ -1,0 +1,36 @@
+<md-content layout-padding layout="column" layout-align="center center">
+	<div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+  		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>  
+	<div class="main-container" layout-fill ng-hide="loading">
+		<h1 class="md-display-1">Account Settings</h1>
+      	<md-divider ></md-divider>		
+      	<h3 class="md-title">Connect to social networks</h3>
+		<section layout="row" layout-sm="column" layout-align="start center">
+			<a href="http://auth.lovehumans.co/flickr?app=humans&domain=settings"><md-button class="md-primary md-hue-1 md-raised">Connect Flickr</md-button></a>
+			<a href="http://auth.lovehumans.co/instagram?app=humans&domain=settings"><md-button class="md-primary md-hue-1 md-raised">Connect Instagram</md-button></a>
+			<a href="http://auth.lovehumans.co/twitter?app=humans&domain=settings"><md-button class="md-primary md-hue-1 md-raised">Connect Twitter</md-button></a>
+			<a href="http://auth.lovehumans.co/facebook?app=humans&domain=settings"><md-button class="md-primary md-hue-1 md-raised">Connect Facebook</md-button></a>
+		</section>      	
+		<md-content class="md-padding">
+		    <md-list>
+		      <md-list-item class="md-3-line" ng-repeat="account in accounts">
+		        <img ng-src="{{account.user_photo_url}}" class="md-avatar" alt="{{account.user_nickname}}" />
+		        <div class="md-list-item-text">
+		          <h3>{{ account.account_type.name }}</h3>
+		          <h4>{{ account.user_nickname }}</h4>
+		          <p><a href="" ng-click="removeAccount(account)">Log out</a></p>
+		        </div>
+		      </md-list-item>
+		     </md-list>	
+		     <md-icon md-font-icon="material-icons" /> 
+		</md-content>      	
+		<md-divider ></md-divider>
+		<section layout="column">
+			<h3 class="md-title">Say goodbye to Humans</h3>
+			<div layout="row">
+				<md-button class="md-primary md-hue-1 md-raised" ng-click="removeUser()">Delete account</md-button>
+			</div>
+		</section>
+	</div>
+</md-content>

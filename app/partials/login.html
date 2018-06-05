@@ -1,0 +1,24 @@
+<md-content layout-padding layout="column" layout-align="center center">
+	<div layout="row" layout-sm="column" layout-align="space-around" ng-show="loggingIn">
+  		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>  
+	<div ng-hide="loggingIn">
+		<h1 class="md-display-1">Sign in to Humans</h1>
+	  	<form name="signinForm">
+		  <md-input-container>
+		    <label>Email</label>
+		    <input ng-model="user.username" type="email">
+		  </md-input-container>
+		  <md-input-container>
+		    <label>Password</label>
+		    <input ng-model="user.password" type="password">
+		  </md-input-container>  
+		  <md-input-container>
+		  	<md-button md-no-ink class="md-primary md-hue-1 md-raised" ng-click="login()">Sign in</md-button>
+		  	<div ng-messages="signinForm.password.$error">	    
+				<div ng-message="errorMessage!=''">{{ errorMessage }}</div>
+			</div>
+		  </md-input-container>
+	   </form>
+	</div>
+</md-content>

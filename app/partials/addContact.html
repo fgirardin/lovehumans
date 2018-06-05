@@ -1,0 +1,39 @@
+<md-content layout-padding layout="column" layout-align="center center">
+	<div class="main-container" layout-fill>
+		<h1 class="md-display-1">Add a feed to {{human.name}}</h1>
+		<form name="addContactForm" class="md-headline">
+			  <md-input-container>
+			    <label>Type the username or name of a contact, friend or connection</label>
+			    <input ng-model="contactSearchTerm" type="text">
+			  </md-input-container>
+			  <div layout="row">
+		  		<md-input-container>
+		  			<md-button md-no-ink class="md-primary md-hue-1 md-raised" ng-click="searchAllContacts()">Search</md-button>
+		  			<div ng-messages="addContactForm.text.$error">	    
+						<div ng-message="errorMessage!=''">{{ errorMessage }}</div>
+					</div>
+		  		</md-input-container>
+		  		<md-input-container>
+		  			<md-button md-no-ink class="md-primary" ng-click="cancel()">Cancel</md-button>
+		  		</md-input-container>		  					  
+		  	  </div>
+	     </form>	
+		 <div layout="row" layout-align="space-around" ng-show="searching">
+  			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+		</div>   	     
+	    <md-list ng-show="contacts.length > 0">
+	      <md-subheader class="md-no-sticky">Results for {{ contactSearchTerm }}</md-subheader>
+	      <md-list-item ng-repeat="contact in contacts" class="md-3-line" ng-click="addContact(contact)">
+	        <img ng-src="{{contact.profile_picture_url}}" class="md-avatar" alt="{{human.name}}" />
+	        <div class="md-list-item-text">
+	        	<h3>Add {{ contact.fullname }}</h3>
+	        	<h4>{{ contact.username }}</h4>
+	        	<p>{{ contact.account_type.name }}</p>
+	        </div>
+            <md-button class="md-icon-button" aria-label="Next">
+              <i class="material-icons">add_circle</i>
+            </md-button>  	        
+	      </md-list-item>
+	     </md-list>		     	
+	</div>
+</md-content>

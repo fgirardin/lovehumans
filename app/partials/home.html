@@ -1,0 +1,60 @@
+<md-content layout-padding layout="column" layout-align="center center">
+  <!-- Storyboard -->
+  <div layout="row" layout-sm="column" layout-align="center center" ng-show="loading" layout-fill>
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <div ng-hide="loading">
+    <div class="main-container" layout-fill>
+
+      <!-- List of humans -->
+      <md-list>
+        <md-subheader class="md-no-sticky">Your humans</md-subheader>
+        <md-list-item ng-click="goToDispatch(human)" class="md-3-line" ng-repeat="human in humans">
+          <img ng-src="{{human.contacts.elements[0].profile_picture_url}}" class="md-avatar" alt="{{human.name}}" />
+          <div class="md-list-item-text">
+            <h3>{{ human.name }}</h3>
+            <h4>{{human.memento.activityStatus}}</h4>
+            <p>{{ human.memento.title }} - {{ human.memento.description }}</p>
+          </div>
+          <md-button class="md-icon-button" aria-label="Next">
+            <i class="material-icons">chevron_right</i>
+          </md-button>          
+        </md-list-item>
+       </md-list>	
+       <div layout="row" layout-align="center center">       
+          <md-button md-no-ink class="md-raised" ng-click="setEdit(true)">Add a Human</md-button>
+        </div>
+     </div>
+
+        <!-- Add human -->
+     <div class="main-container" ng-show="edit" layout-fill>      
+        <md-list>
+          <md-subheader class="md-no-sticky">Add a Human</md-subheader>
+          <md-list-item ng-click="createHuman()" class="md-2-line">
+            <img ng-src="img/avatar.jpg" class="md-avatar" alt="Add a Human" />
+            <div class="md-list-item-text">
+              <h3>Add a Customized Human</h3>
+              <p>Create a Human by aggregating feeds of contacts, friends, or connections.</p>
+            </div>
+            <md-button class="md-icon-button" aria-label="Next">
+              <i class="material-icons">add_circle</i>
+            </md-button>          
+          </md-list-item>              
+          <md-list-item ng-click="createHumanWithSuggestion(human)" class="md-2-line" ng-repeat="human in suggestedHumans.humans">
+            <img ng-src="{{human.all_contacts[0].profile_picture_url}}" class="md-avatar" alt="{{human.name}}" />
+            <div class="md-list-item-text">
+              <h3>Add {{ human.name }}</h3>          
+              <h4><div ng-repeat="contact in human.all_contacts">{{contact.account_type.name}}</div></h4>
+              <p>Recently, {{ human.summary }}</p>
+            </div>
+            <md-button class="md-icon-button" aria-label="Next">
+              <i class="material-icons">add_circle</i>
+            </md-button>  
+          </md-list-item>
+         </md-list> 
+     </div>
+   </div>
+
+
+</md-content>

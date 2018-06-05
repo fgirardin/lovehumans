@@ -1,0 +1,35 @@
+<md-content layout-padding layout="column" layout-align="center center">
+	<div class="main-container" layout-fill>
+	  	<section layout="row" layout-align="end">
+			<md-button class="md-primary" ng-click="saveHuman();">Save</md-button>
+		</section>		
+		<form name="editHumanForm">
+			  <md-input-container>
+		    	<label>Human Name</label>
+		    	<input class="md-display-1" ng-model="human.name" type="text">
+		  	</md-input-container>
+	    </form>
+	    <section layout="column">
+		    <md-list>
+		      <h3 class="md-title">Feeds</h3>
+		      <p class="md-caption">A Human is a combination of feeds of one or many of your contacts, friends, or connections</p>
+		      <md-list-item class="md-3-line" ng-repeat="contact in human.contacts.elements">
+		        <img ng-src="{{contact.profile_picture_url}}" class="md-avatar" alt="{{human.name}}" />
+		        <div class="md-list-item-text">
+		          <h3>{{ contact.fullname }}</h3>
+		          <h4>{{ contact.account_type.name }}</h4>
+			      <p><a href="" ng-click="removeContact(contact)">Remove</a></p>
+		        </div>
+		      </md-list-item>
+		      <md-button class="md-primary md-hue-1 md-raised" ng-click="addContact()">Add a Feed</md-button>		   
+		     </md-list>
+		 </section>
+	    <md-divider></md-divider>		 
+		<section layout="column">
+			<h3 class="md-title">Say goodbye to {{human.name}}</h3>
+			<div layout="row">
+				<md-button class="md-primary md-hue-1 md-raised" ng-click="removeHuman()">Delete this Human</md-button>
+			</div>
+		</section>	       
+ 	</div>
+</md-content>
